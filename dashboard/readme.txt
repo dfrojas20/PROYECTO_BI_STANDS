@@ -1,0 +1,1 @@
+En esta carpeta se guardara el dashboard.
