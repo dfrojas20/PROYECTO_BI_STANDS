@@ -1,0 +1,374 @@
+--CREATE DATABASE STANDS
+-- Crear esquema
+
+CREATE SCHEMA bd_stands;
+
+-- Cambiar al esquema
+SET search_path TO bd_stands;
+
+-- Crear tabla PAIS
+CREATE TABLE bd_stands.pais (
+    cod_pais SERIAL PRIMARY KEY,
+    nb_pais VARCHAR(255) NOT NULL
+);
+
+-- Crear tabla CIUDAD
+CREATE TABLE bd_stands.ciudad (
+    cod_ciudad SERIAL PRIMARY KEY,
+    nb_ciudad VARCHAR(255) NOT NULL,
+    cod_pais INT,
+    FOREIGN KEY (cod_pais) REFERENCES bd_stands.pais(cod_pais)
+);
+
+-- Crear tabla SEDE
+CREATE TABLE bd_stands.sede (
+    cod_sede SERIAL PRIMARY KEY,
+    nb_sede VARCHAR(255) NOT NULL,
+    cod_ciudad INT,
+    FOREIGN KEY (cod_ciudad) REFERENCES bd_stands.ciudad(cod_ciudad)
+);
+
+-- Crear tabla TIPO_EVENTO
+CREATE TABLE bd_stands.tipo_evento (
+    cod_tipo_evento SERIAL PRIMARY KEY,
+    nb_tipo_evento VARCHAR(255) NOT NULL
+);
+
+-- Crear tabla EVENTO
+CREATE TABLE bd_stands.evento (
+    cod_evento SERIAL PRIMARY KEY,
+    nb_evento VARCHAR(255) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    descripcion TEXT,
+    cod_sede INT,
+    email VARCHAR(255),
+    cod_tipo_evento INT,
+    FOREIGN KEY (cod_sede) REFERENCES bd_stands.sede(cod_sede),
+    FOREIGN KEY (cod_tipo_evento) REFERENCES bd_stands.tipo_evento(cod_tipo_evento)
+);
+
+-- Crear tabla TIPO_STAND
+CREATE TABLE bd_stands.tipo_stand (
+    cod_tipo_stand SERIAL PRIMARY KEY,
+    nb_tipo_stand VARCHAR(255) NOT NULL
+);
+
+-- Crear tabla EVENTO_STAND
+CREATE TABLE bd_stands.evento_stand (
+    cod_evento INT,
+    cod_tipo_stand INT,
+    cantidad_estimada INT,
+    mts2 FLOAT,
+    precio DECIMAL(10,2),
+    PRIMARY KEY (cod_evento, cod_tipo_stand),
+    FOREIGN KEY (cod_evento) REFERENCES bd_stands.evento(cod_evento),
+    FOREIGN KEY (cod_tipo_stand) REFERENCES bd_stands.tipo_stand(cod_tipo_stand)
+);
+
+-- Crear tabla CATEGORIA
+CREATE TABLE categoria (
+    cod_categoria SERIAL PRIMARY KEY,
+    nb_categoria VARCHAR(255) NOT NULL
+);
+
+-- Crear tabla SUBCATEGORIA
+CREATE TABLE bd_stands.subcategoria (
+    cod_sub_categoria SERIAL PRIMARY KEY,
+    nb_sub_categoria VARCHAR(255) NOT NULL,
+    cod_categoria INT,
+    FOREIGN KEY (cod_categoria) REFERENCES bd_stands.categoria(cod_categoria)
+);
+
+-- Crear tabla CLIENTE
+CREATE TABLE bd_stands.cliente (
+    cod_cliente SERIAL PRIMARY KEY,
+    nb_cliente VARCHAR(255) NOT NULL,
+    ci_rif VARCHAR(20) NOT NULL,
+    telefono VARCHAR(20),
+    direccion VARCHAR(255),
+    email VARCHAR(255)
+);
+
+-- Crear tabla CONTRATO
+CREATE TABLE bd_stands.contrato (
+    nro_stand SERIAL PRIMARY KEY,
+    cod_evento INT,
+    cod_tipo_stand INT,
+    fecha_alquiler DATE NOT NULL,
+    cod_cliente INT,
+    mts2 FLOAT,
+    monto DECIMAL(10,2),
+    cod_sub_categoria INT,
+    FOREIGN KEY (cod_evento,cod_tipo_stand) REFERENCES bd_stands.evento_stand(cod_evento,cod_tipo_stand),
+    FOREIGN KEY (cod_cliente) REFERENCES bd_stands.cliente(cod_cliente),
+    FOREIGN KEY (cod_sub_categoria) REFERENCES bd_stands.subcategoria(cod_sub_categoria)
+);
+
+-- Crear tabla VISITANTE
+CREATE TABLE bd_stands.visitante (
+    cod_visitante SERIAL PRIMARY KEY,
+    cedula VARCHAR(20) NOT NULL,
+    nb_visitante VARCHAR(255) NOT NULL,
+    sexo CHAR(1),
+    email VARCHAR(255)
+);
+
+-- Crear tabla LEYENDA_ESTRELLAS
+CREATE TABLE bd_stands.leyenda_estrellas (
+    cod_leyenda_estrellas SERIAL PRIMARY KEY,
+    nb_descripcion VARCHAR(255) NOT NULL
+);
+
+-- Crear tabla ENTRADA
+CREATE TABLE bd_stands.entrada (
+    nro_entrada SERIAL PRIMARY KEY,
+    cod_evento INT,
+    fecha_entrada DATE NOT NULL,
+    hora_entrada TIME NOT NULL,
+    cod_visitante INT,
+    recomienda_amigo BOOLEAN,
+    calificacion INT,
+    cod_leyenda_estrellas INT,
+    FOREIGN KEY (cod_evento) REFERENCES bd_stands.evento(cod_evento),
+    FOREIGN KEY (cod_visitante) REFERENCES bd_stands.visitante(cod_visitante),
+    FOREIGN KEY (cod_leyenda_estrellas) REFERENCES bd_stands.leyenda_estrellas(cod_leyenda_estrellas)
+);
+
+-- Insertar datos para PAIS
+INSERT INTO bd_stands.pais (nb_pais) VALUES
+  ('Venezuela'),
+  ('Colombia'),
+  ('Argentina'),
+  ('Perú');
+
+-- Insertar datos para CIUDAD
+INSERT INTO bd_stands.ciudad (nb_ciudad, cod_pais) VALUES
+  ('Caracas', 1),
+  ('Maracaibo', 1),
+  ('Bogotá', 2),
+  ('Medellín', 2),
+  ('Buenos Aires', 3),
+  ('Córdoba', 3),
+  ('Lima', 4),
+  ('Arequipa', 4);
+  
+-- Insertar datos para SEDE
+INSERT INTO bd_stands.sede (nb_sede, cod_ciudad) VALUES
+  ('Centro de Convenciones Caracas', 1),
+  ('Palacio de Exposiciones Maracaibo', 2),
+  ('Centro de Eventos Bogotá', 3),
+  ('Centro Internacional de Convenciones Medellín', 4),
+  ('Centro de Eventos Buenos Aires', 5),
+  ('Centro de Convenciones Córdoba', 6),
+  ('Centro de Convenciones Lima', 7),
+  ('Centro de Exposiciones Arequipa', 8);
+  
+-- Insertar datos para TIPO_EVENTO
+INSERT INTO bd_stands.tipo_evento (nb_tipo_evento) VALUES
+  ('Feria'),
+  ('Bazar'),
+  ('Exposición');
+  
+-- Insertar datos para EVENTO entre 2017 y 2023
+INSERT INTO bd_stands.evento (nb_evento, fecha_inicio, fecha_fin, descripcion, cod_sede, email, cod_tipo_evento) VALUES
+  ('ExpoGastronomía 2018', '2018-05-15', '2018-05-20', 'La feria anual de comida internacional', 1, 'info@expogastronomia.com', 1),
+  ('FashionShow 2019', '2019-07-01', '2019-07-07', 'Desfile de moda de diseñadores emergentes', 2, 'info@fashionshow.com', 2),
+  ('TecnologíaExpo 2020', '2020-09-10', '2020-09-15', 'Explora las últimas innovaciones tecnológicas', 3, 'info@tecnologiaexpo.com', 3),
+  ('FeriaDeportiva 2021', '2021-11-01', '2021-11-07', 'Encuentra equipos y accesorios deportivos de primera calidad', 4, 'info@feriadeportiva.com', 1),
+  ('ArteEnFoco 2017', '2017-03-15', '2017-03-20', 'Exposición de obras de artistas contemporáneos', 5, 'info@arteenfoco.com', 3),
+  ('TechInnovation Summit 2018', '2018-04-05', '2018-04-10', 'Conferencias sobre las últimas tendencias tecnológicas', 6, 'info@techinnovation.com', 3),
+  ('TurismoExpo 2019', '2019-06-21', '2019-06-26', 'Descubre destinos turísticos y ofertas de viajes', 1, 'info@turismoexpo.com', 2),
+  ('EcoFair 2020', '2020-08-15', '2020-08-20', 'Feria dedicada a productos ecológicos y sostenibles', 2, 'info@ecofair.com', 1),
+  ('MusicFest 2021', '2021-10-05', '2021-10-10', 'Festival de música con artistas locales e internacionales', 3, 'info@musicfest.com', 2),
+  ('TechStartup Showcase 2022', '2022-12-01', '2022-12-07', 'Presentación de nuevas startups tecnológicas', 4, 'info@techstartup.com', 3),
+  ('FoodTruck Festival 2017', '2017-02-15', '2017-02-20', 'Celebración de la variedad culinaria en food trucks', 5, 'info@foodtruckfestival.com', 1),
+  ('FitnessExpo 2018', '2018-04-20', '2018-04-25', 'Evento dedicado a la salud y el fitness', 6, 'info@fitnessexpo.com', 1),
+  ('PetShow 2019', '2019-06-01', '2019-06-07', 'Exhibición de productos y servicios para mascotas', 1, 'info@petshow.com', 2),
+  ('ArtisanCraft Fair 2020', '2020-08-10', '2020-08-15', 'Feria de artesanías hechas a mano', 2, 'info@artisancraftfair.com', 2),
+  ('BookExpo 2021', '2021-10-20', '2021-10-25', 'Encuentro anual para amantes de la lectura y la literatura', 3, 'info@bookexpo.com', 3),
+  ('AutoShow 2022', '2022-12-05', '2022-12-10', 'Exhibición de los últimos modelos de automóviles', 4, 'info@autoshow.com', 1);
+
+-- Insertar datos para TIPO_STAND
+INSERT INTO bd_stands.tipo_stand (nb_tipo_stand) VALUES
+  ('Mínima'),
+  ('Estándar'),
+  ('Máximo/Ajustable');
+  
+INSERT INTO bd_stands.evento_stand (cod_evento, cod_tipo_stand, cantidad_estimada, mts2, precio) VALUES
+  (1, 1, 5, 50.0, 1000.0),
+  (1, 2, 10, 100.0, 2000.0),
+  (1, 3, 15, 150.0, 3000.0),
+  (2, 1, 5, 50.0, 1200.0),
+  (2, 2, 10, 100.0, 2200.0),
+  (2, 3, 15, 150.0, 3200.0),
+  (3, 1, 8, 80.0, 1500.0),
+  (3, 2, 12, 120.0, 2500.0),
+  (3, 3, 20, 200.0, 4000.0),
+  (4, 1, 6, 60.0, 1100.0),
+  (4, 2, 15, 150.0, 2800.0),
+  (4, 3, 25, 250.0, 4500.0),
+  (5, 1, 7, 70.0, 1300.0),
+  (5, 2, 14, 140.0, 2600.0),
+  (5, 3, 18, 180.0, 3500.0),
+  (6, 1, 9, 90.0, 1600.0),
+  (6, 2, 16, 160.0, 3000.0),
+  (6, 3, 22, 220.0, 4200.0),
+  (7, 1, 7, 70.0, 1400.0),
+  (7, 2, 12, 120.0, 2400.0),
+  (7, 3, 17, 170.0, 3200.0),
+  (8, 1, 10, 100.0, 1800.0),
+  (8, 2, 18, 180.0, 3200.0),
+  (8, 3, 24, 240.0, 4200.0),
+  (9, 1, 8, 80.0, 1600.0),
+  (9, 2, 15, 150.0, 2800.0),
+  (9, 3, 20, 200.0, 3800.0),
+  (10, 1, 6, 60.0, 1200.0),
+  (10, 2, 10, 100.0, 2000.0),
+  (10, 3, 15, 150.0, 3000.0),
+  (11, 1, 8, 80.0, 1400.0),
+  (11, 2, 14, 140.0, 2600.0),
+  (11, 3, 20, 200.0, 3800.0),
+  (12, 1, 7, 70.0, 1300.0),
+  (12, 2, 12, 120.0, 2400.0),
+  (12, 3, 18, 180.0, 3200.0),
+  (13, 1, 9, 90.0, 1600.0),
+  (13, 2, 16, 160.0, 3000.0),
+  (13, 3, 22, 220.0, 4200.0),
+  (14, 1, 7, 70.0, 1400.0),
+  (14, 2, 12, 120.0, 2400.0),
+  (14, 3, 17, 170.0, 3200.0),
+  (15, 1, 10, 100.0, 1800.0),
+  (15, 2, 18, 180.0, 3200.0),
+  (15, 3, 24, 240.0, 4200.0);
+ 
+
+-- Insertar datos para CATEGORIA
+INSERT INTO bd_stands.categoria (nb_categoria) VALUES
+  ('Gastronomía'),
+  ('Moda y Diseño'),
+  ('Tecnología');
+
+INSERT INTO bd_stands.subcategoria (nb_sub_categoria, cod_categoria) VALUES
+  ('Gastronomía Asiática', 1),
+  ('Moda Sostenible', 2),
+  ('Tecnología Innovadora', 3),
+  ('Equipamiento Deportivo', 1),
+  ('Arte Contemporáneo', 2)
+;
+-- Insertar datos para CLIENTE
+INSERT INTO bd_stands.cliente (nb_cliente, ci_rif, telefono, direccion, email) VALUES
+  ('Gastronomía Express C.A.', 'J123456789', '+58 412-1234567', 'Av. Principal, Caracas', 'info@gastronomiaexpress.com'),
+  ('Fashion Trends S.A.', 'V987654321', '+57 310-9876543', 'Calle de la Moda, Bogotá', 'info@fashiontrends.com'),
+  ('Tech Solutions Corp.', 'R112233445', '+54 11-45678901', 'Av. Tecnológica, Buenos Aires', 'info@techsolutions.com'),
+  ('Sports Emporium Ltd.', 'J876543210', '+51 987-654321', 'Carrera Deportiva, Lima', 'info@sportsemporium.com'),
+  ('Artistic Creations LLC', 'V112233445', '+58 212-7654321', 'Calle del Arte, Caracas', 'info@artisticcreations.com');
+
+--Insertar evento 1
+INSERT INTO bd_stands.contrato (nro_stand, cod_evento, cod_tipo_stand, fecha_alquiler, cod_cliente, mts2, monto, cod_sub_categoria) VALUES
+  (1, 1, 1, '2018-05-08', 1, 50.0, 1000.0, 1),
+  (2, 1, 2, '2018-05-08', 1, 100.0, 2000.0, 2),
+  (3, 1, 3, '2018-05-08', 1, 150.0, 3000.0, 3),
+  (4, 1, 1, '2018-05-09', 2, 50.0, 1200.0, 4),
+  (5, 1, 2, '2018-05-09', 2, 100.0, 2200.0, 5),
+  (6, 1, 3, '2018-05-09', 2, 150.0, 3200.0, 1),
+  (7, 1, 1, '2018-05-10', 3, 80.0, 1500.0, 2),
+  (8, 1, 2, '2018-05-10', 3, 120.0, 2500.0, 3),
+  (9, 1, 3, '2018-05-10', 3, 200.0, 4000.0, 4),
+  (10, 1, 1, '2018-05-11', 4, 60.0, 1100.0, 5),
+  (11, 1, 2, '2018-05-11', 4, 150.0, 2800.0, 1),
+  (12, 1, 3, '2018-05-11', 4, 250.0, 4500.0, 2),
+  (13, 1, 1, '2018-05-12', 5, 70.0, 1300.0, 3),
+  (14, 1, 2, '2018-05-12', 5, 140.0, 2600.0, 4),
+  (15, 1, 3, '2018-05-12', 5, 180.0, 3500.0, 5),
+  (16, 1, 1, '2018-05-08', 1, 50.0, 1000.0, 1),
+  (17, 1, 2, '2018-05-08', 1, 100.0, 2000.0, 2),
+  (18, 1, 3, '2018-05-08', 1, 150.0, 3000.0, 3),
+  (19, 1, 1, '2018-05-09', 2, 50.0, 1200.0, 4),
+  (20, 1, 2, '2018-05-09', 2, 100.0, 2200.0, 5),
+  (21, 1, 3, '2018-05-09', 2, 150.0, 3200.0, 1),
+  (22, 1, 1, '2018-05-10', 3, 80.0, 1500.0, 2),
+  (23, 1, 2, '2018-05-10', 3, 120.0, 2500.0, 3),
+  (24, 1, 3, '2018-05-10', 3, 200.0, 4000.0, 4),
+  (25, 1, 1, '2018-05-11', 4, 60.0, 1100.0, 5),
+  (26, 1, 2, '2018-05-11', 4, 150.0, 2800.0, 1),
+  (27, 1, 3, '2018-05-11', 4, 250.0, 4500.0, 2),
+  (28, 1, 1, '2018-05-12', 5, 70.0, 1300.0, 3),
+  (29, 1, 2, '2018-05-12', 5, 140.0, 2600.0, 4),
+  (30, 1, 3, '2018-05-12', 5, 180.0, 3500.0, 5);
+  
+-- Insertar datos aleatorios para CONTRATO (para el segundo evento, 7 días antes del 2019-07-01)
+INSERT INTO bd_stands.contrato (nro_stand,cod_evento, cod_tipo_stand, fecha_alquiler, cod_cliente, mts2, monto, cod_sub_categoria) VALUES
+  (31,2, 1, '2019-06-24', 1, 60.0, 1500.0, 2),
+  (32,2, 2, '2019-06-24', 1, 110.0, 2500.0, 3),
+  (33,2, 3, '2019-06-24', 1, 160.0, 3500.0, 4),
+  (34,2, 1, '2019-06-25', 2, 45.0, 1300.0, 5),
+  (35,2, 2, '2019-06-25', 2, 105.0, 2000.0, 1),
+  (36,2, 3, '2019-06-25', 2, 180.0, 3200.0, 2),
+  (37,2, 1, '2019-06-26', 3, 80.0, 1800.0, 3),
+  (38,2, 2, '2019-06-26', 3, 120.0, 2600.0, 4),
+  (39,2, 3, '2019-06-26', 3, 190.0, 4000.0, 5),
+  (40,2, 1, '2019-06-27', 4, 65.0, 1400.0, 1),
+  (41,2, 2, '2019-06-27', 4, 155.0, 3000.0, 2),
+  (42,2, 3, '2019-06-27', 4, 200.0, 4200.0, 3),
+  (43,2, 1, '2019-06-28', 5, 70.0, 1600.0, 4),
+  (44,2, 2, '2019-06-28', 5, 135.0, 2400.0, 5),
+  (45,2, 3, '2019-06-28', 5, 200.0, 3500.0, 1),
+  (46,2, 1, '2019-06-24', 1, 55.0, 1200.0, 3),
+  (47,2, 2, '2019-06-24', 1, 115.0, 2300.0, 4),
+  (48,2, 3, '2019-06-24', 1, 170.0, 3100.0, 5),
+  (49,2, 1, '2019-06-25', 2, 50.0, 1400.0, 1),
+  (50,2, 2, '2019-06-25', 2, 100.0, 2000.0, 2),
+  (51,2, 3, '2019-06-25', 2, 180.0, 3200.0, 3),
+  (52,2, 1, '2019-06-26', 3, 75.0, 1600.0, 4),
+  (53,2, 2, '2019-06-26', 3, 125.0, 2400.0, 5),
+  (54,2, 3, '2019-06-26', 3, 190.0, 4000.0, 1),
+  (55,2, 1, '2019-06-27', 4, 65.0, 1300.0, 2),
+  (56,2, 2, '2019-06-27', 4, 150.0, 2900.0, 3),
+  (57,2, 3, '2019-06-27', 4, 200.0, 4100.0, 4),
+  (58,2, 1, '2019-06-28', 5, 70.0, 1500.0, 5),
+  (59,2, 2, '2019-06-28', 5, 140.0, 2200.0, 1),
+  (60,2, 3, '2019-06-28', 5, 210.0, 3400.0, 2);
+  
+-- Insertar datos para CONTRATO (para el tercer evento, 7 días antes del 2020-09-10)
+INSERT INTO bd_stands.contrato (nro_stand, cod_evento, cod_tipo_stand, fecha_alquiler, cod_cliente, mts2, monto, cod_sub_categoria) VALUES
+  (61, 3, 1, '2020-09-03', 1, 42.0, 1050.0, 2),
+  (62, 3, 2, '2020-09-03', 3, 77.0, 1750.0, 3),
+  (63, 3, 3, '2020-09-03', 5, 119.0, 2530.0, 4),
+  (64, 3, 1, '2020-09-04', 3, 35.0, 1120.0, 5),
+  (65, 3, 2, '2020-09-04', 2, 88.0, 2200.0, 1),
+  (66, 3, 3, '2020-09-04', 4, 153.0, 4160.0, 2),
+  (67, 3, 1, '2020-09-05', 2, 60.0, 1360.0, 3),
+  (68, 3, 2, '2020-09-05', 5, 98.0, 2860.0, 4),
+  (69, 3, 3, '2020-09-05', 1, 209.0, 5200.0, 5),
+  (70, 3, 1, '2020-09-06', 2, 49.0, 910.0, 1),
+  (71, 3, 2, '2020-09-06', 2, 124.0, 2000.0, 2),
+  (72, 3, 3, '2020-09-06', 5, 195.0, 3220.0, 3),
+  (73, 3, 1, '2020-09-07', 3, 56.0, 1260.0, 4),
+  (74, 3, 2, '2020-09-07', 1, 110.0, 1960.0, 5),
+  (75, 3, 3, '2020-09-07', 2, 152.0, 2590.0, 1),
+  (76, 3, 1, '2020-09-03', 1, 48.0, 1180.0, 2),
+  (77, 3, 2, '2020-09-03', 2, 80.0, 1920.0, 3),
+  (78, 3, 3, '2020-09-03', 3, 110.0, 2700.0, 4),
+  (79, 3, 1, '2020-09-04', 4, 40.0, 980.0, 5),
+  (80, 3, 2, '2020-09-04', 5, 95.0, 2400.0, 1),
+  (81, 3, 3, '2020-09-04', 1, 165.0, 3750.0, 2),
+  (82, 3, 1, '2020-09-05', 2, 68.0, 1560.0, 3),
+  (83, 3, 2, '2020-09-05', 3, 110.0, 2860.0, 4),
+  (84, 3, 3, '2020-09-05', 4, 220.0, 5600.0, 5),
+  (85, 3, 1, '2020-09-06', 5, 45.0, 840.0, 1),
+  (86, 3, 2, '2020-09-06', 1, 115.0, 2200.0, 2),
+  (87, 3, 3, '2020-09-06', 2, 180.0, 3100.0, 3),
+  (88, 3, 1, '2020-09-07', 3, 50.0, 1100.0, 4),
+  (89, 3, 2, '2020-09-07', 4, 105.0, 1800.0, 5),
+  (90, 3, 3, '2020-09-07', 5, 160.0, 2400.0, 1);
+
+
+
+  
+  
+  
+  
+
+
+
