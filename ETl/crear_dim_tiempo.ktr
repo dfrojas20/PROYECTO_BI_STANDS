@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformation 2</name>
+    <name>crear_dim_tiempo</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -443,7 +443,7 @@
     <database>STANDS</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2d6f849fa2188c3fbde</password>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -749,9 +749,9 @@
     </GUI>
   </step>
   <step>
-    <name>nombrar_trimestre</name>
-    <type>ValueMapper</type>
-    <description>nombrar trimestres</description>
+    <name>insertar en dim tiempo</name>
+    <type>InsertUpdate</type>
+    <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
@@ -759,27 +759,156 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <field_to_use>cod_trimestre</field_to_use>
-    <target_field>desc_trimestre</target_field>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value>1</source_value>
-        <target_value>primer trimestre (enero, febrero, marzo)</target_value>
-      </field>
-      <field>
-        <source_value>2</source_value>
-        <target_value>segundo trimestre (Abril, Mayo, Junio)</target_value>
-      </field>
-      <field>
-        <source_value>3</source_value>
-        <target_value>tercer trimestre(Julio,Agosto, Septiembre)</target_value>
-      </field>
-      <field>
-        <source_value>4</source_value>
-        <target_value>cuarto trimestre(Octubre, Noviembre, Diciembre)</target_value>
-      </field>
-    </fields>
+    <connection>stands</connection>
+    <commit>500</commit>
+    <update_bypassed>Y</update_bypassed>
+    <lookup>
+      <schema>dimensional_eventos</schema>
+      <table>dim_tiempo</table>
+      <key>
+        <name>sequence</name>
+        <field>sk_tiempo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>date</name>
+        <field>fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_mes</name>
+        <field>cod_mes</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_anio</name>
+        <field>cod_anio</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_trimestre</name>
+        <field>cod_trimestre</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_dia_semana</name>
+        <field>cod_dia_semana</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_dia_mes</name>
+        <field>cod_dia_mes</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_dia_anio</name>
+        <field>cod_dia_anio</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_semana</name>
+        <field>cod_semana</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>desc_trimestre</name>
+        <field>des_trimestre</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>desc_dia_semana</name>
+        <field>desc_dia_semana</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>desc_mes</name>
+        <field>desc_mes</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>desc_mes_corta</name>
+        <field>desc_mes_corta</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>sk_tiempo</name>
+        <rename>sequence</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>fecha</name>
+        <rename>date</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_mes</name>
+        <rename>cod_mes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_anio</name>
+        <rename>cod_anio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_trimestre</name>
+        <rename>cod_trimestre</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_dia_semana</name>
+        <rename>cod_dia_semana</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_dia_mes</name>
+        <rename>cod_dia_mes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_dia_anio</name>
+        <rename>cod_dia_anio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_semana</name>
+        <rename>cod_semana</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>des_trimestre</name>
+        <rename>desc_trimestre</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>desc_dia_semana</name>
+        <rename>desc_dia_semana</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>desc_mes</name>
+        <rename>desc_mes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>desc_mes_corta</name>
+        <rename>desc_mes_corta</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -789,8 +918,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>64</yloc>
+      <xloc>768</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1009,9 +1138,9 @@
     </GUI>
   </step>
   <step>
-    <name>insertar en dim tiempo</name>
-    <type>InsertUpdate</type>
-    <description/>
+    <name>nombrar_trimestre</name>
+    <type>ValueMapper</type>
+    <description>nombrar trimestres</description>
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
@@ -1019,156 +1148,27 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>stands</connection>
-    <commit>500</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema>dimensional_eventos</schema>
-      <table>dim_tiempo</table>
-      <key>
-        <name>sequence</name>
-        <field>sk_tiempo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>date</name>
-        <field>fecha</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_mes</name>
-        <field>cod_mes</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_anio</name>
-        <field>cod_anio</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_trimestre</name>
-        <field>cod_trimestre</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_dia_semana</name>
-        <field>cod_dia_semana</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_dia_mes</name>
-        <field>cod_dia_mes</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_dia_anio</name>
-        <field>cod_dia_anio</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_semana</name>
-        <field>cod_semana</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>desc_trimestre</name>
-        <field>des_trimestre</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>desc_dia_semana</name>
-        <field>desc_dia_semana</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>desc_mes</name>
-        <field>desc_mes</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>desc_mes_corta</name>
-        <field>desc_mes_corta</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>sk_tiempo</name>
-        <rename>sequence</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>fecha</name>
-        <rename>date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_mes</name>
-        <rename>cod_mes</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_anio</name>
-        <rename>cod_anio</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_trimestre</name>
-        <rename>cod_trimestre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_dia_semana</name>
-        <rename>cod_dia_semana</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_dia_mes</name>
-        <rename>cod_dia_mes</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_dia_anio</name>
-        <rename>cod_dia_anio</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_semana</name>
-        <rename>cod_semana</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>des_trimestre</name>
-        <rename>desc_trimestre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>desc_dia_semana</name>
-        <rename>desc_dia_semana</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>desc_mes</name>
-        <rename>desc_mes</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>desc_mes_corta</name>
-        <rename>desc_mes_corta</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <field_to_use>cod_trimestre</field_to_use>
+    <target_field>desc_trimestre</target_field>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>1</source_value>
+        <target_value>primer trimestre (enero, febrero, marzo)</target_value>
+      </field>
+      <field>
+        <source_value>2</source_value>
+        <target_value>segundo trimestre (Abril, Mayo, Junio)</target_value>
+      </field>
+      <field>
+        <source_value>3</source_value>
+        <target_value>tercer trimestre(Julio,Agosto, Septiembre)</target_value>
+      </field>
+      <field>
+        <source_value>4</source_value>
+        <target_value>cuarto trimestre(Octubre, Noviembre, Diciembre)</target_value>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1178,8 +1178,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>160</yloc>
+      <xloc>416</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

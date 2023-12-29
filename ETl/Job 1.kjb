@@ -304,7 +304,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
+      <xloc>48</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -343,7 +343,7 @@
       <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
+      <xloc>608</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -382,7 +382,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>192</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -393,7 +393,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:\Users\Usuario\Desktop\SEMESTRE 9\INTELIGENCIA DE NEGOCIOS\PROYECTO_BD_STANDS\ETl\dim_categoria.ktr</filename>
+      <filename>C:/Users/Usuario/Desktop/SEMESTRE 9/INTELIGENCIA DE NEGOCIOS/PROYECTO_BD_STANDS/ETl/dim_cliente.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -421,7 +421,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>464</xloc>
+      <xloc>336</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -460,7 +460,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>480</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -486,7 +486,7 @@
     </hop>
     <hop>
       <from>Start</from>
-      <to>ETL_TIEMPO</to>
+      <to>ETL_CATEGORIA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -494,8 +494,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>ETL_TIEMPO</from>
-      <to>ETL_CATEGORIA</to>
+      <from>ETL_EVENTO</from>
+      <to>ETL_TIEMPO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
