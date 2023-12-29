@@ -430,7 +430,7 @@
     <created_date>2023/12/28 15:42:21.704</created_date>
     <modified_user>-</modified_user>
     <modified_date>2023/12/28 15:42:21.704</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -443,7 +443,7 @@
     <database>STANDS</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <password>Encrypted 2be98afc86aa7f2d6f849fa2188c3fbde</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -489,7 +489,7 @@
   <order>
     <hop>
       <from>CATEGORIA</from>
-      <to>Búsqueda/actualización en dimensión</to>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -506,7 +506,8 @@
     </partitioning>
     <connection>connection_dimensional_bd_stands</connection>
     <sql>SELECT c.*, s.cod_sub_categoria, s.nb_sub_categoria
-FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
+FROM bd_stands.categoria c, bd_stands.subcategoria s
+WHERE c.cod_categoria = s.cod_categoria</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -523,8 +524,8 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <origin>CATEGORIA</origin>
         <comments>cod_categoria</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -533,7 +534,7 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -546,8 +547,8 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <origin>CATEGORIA</origin>
         <comments>nb_categoria</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -556,7 +557,7 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -569,8 +570,8 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <origin>CATEGORIA</origin>
         <comments>cod_sub_categoria</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -579,7 +580,7 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -592,8 +593,8 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <origin>CATEGORIA</origin>
         <comments>nb_sub_categoria</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -602,7 +603,7 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -616,14 +617,14 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>200</xloc>
-      <yloc>100</yloc>
+      <xloc>80</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Búsqueda/actualización en dimensión</name>
-    <type>DimensionLookup</type>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -632,58 +633,68 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>dimensional_eventos</schema>
-    <table>dim_categoria</table>
     <connection>connection_dimensional_bd_stands</connection>
     <commit>100</commit>
-    <update>Y</update>
-    <fields>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dimensional_eventos</schema>
+      <table>dim_categoria</table>
       <key>
         <name>cod_categoria</name>
-        <lookup>sk_categoria</lookup>
+        <field>cod_categoria</field>
+        <condition>=</condition>
+        <name2/>
       </key>
-      <date>
-        <name/>
-        <from>date_from</from>
-        <to>date_to</to>
-      </date>
-      <field>
-        <name>cod_sub_categoria</name>
-        <lookup>cod_subcategoria</lookup>
-        <update>Insert</update>
-      </field>
-      <field>
-        <name>nb_sub_categoria</name>
-        <lookup>nb_subcategoria</lookup>
-        <update>Insert</update>
-      </field>
-      <field>
-        <name>cod_categoria</name>
-        <lookup>cod_categoria</lookup>
-        <update>Insert</update>
-      </field>
-      <field>
+      <key>
         <name>nb_categoria</name>
-        <lookup>nb_categoria</lookup>
-        <update>Insert</update>
-      </field>
-      <return>
+        <field>nb_categoria</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_sub_categoria</name>
+        <field>cod_subcategoria</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>nb_sub_categoria</name>
+        <field>nb_subcategoria</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_sub_categoria</name>
+        <field>sk_categoria</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_categoria</name>
+        <rename>cod_categoria</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nb_categoria</name>
+        <rename>nb_categoria</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_subcategoria</name>
+        <rename>cod_sub_categoria</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nb_subcategoria</name>
+        <rename>nb_sub_categoria</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>sk_categoria</name>
-        <rename/>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-        <version>version</version>
-      </return>
-    </fields>
-    <sequence/>
-    <min_year>1900</min_year>
-    <max_year>2199</max_year>
-    <cache_size>5000</cache_size>
-    <preload_cache>N</preload_cache>
-    <use_start_date_alternative>N</use_start_date_alternative>
-    <start_date_alternative>none</start_date_alternative>
-    <start_date_field_name/>
-    <useBatch>N</useBatch>
+        <rename>cod_sub_categoria</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -693,8 +704,8 @@ FROM bd_stands.categoria c, bd_stands.subcategoria s</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>100</yloc>
+      <xloc>192</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

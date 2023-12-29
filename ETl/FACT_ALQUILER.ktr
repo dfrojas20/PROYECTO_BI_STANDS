@@ -430,7 +430,7 @@
     <created_date>2023/12/28 14:04:18.569</created_date>
     <modified_user>-</modified_user>
     <modified_date>2023/12/28 14:04:18.569</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -443,7 +443,7 @@
     <database>STANDS</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce108fc0fc8e</password>
+    <password>Encrypted 2be98afc86aa7f2d6f849fa2188c3fbde</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -489,16 +489,11 @@
   <order>
     <hop>
       <from>ALQUILER</from>
-      <to>evento_alquiler2</to>
+      <to>agregar_cantidad</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>evento_alquiler2</from>
-      <to>Selecciona/Renombra valores</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Selecciona/Renombra valores</from>
+      <from>agregar_cantidad</from>
       <to>Insertar / Actualizar</to>
       <enabled>Y</enabled>
     </hop>
@@ -515,14 +510,21 @@
       <schema_name/>
     </partitioning>
     <connection>connection_pentaho_bd_stands</connection>
-    <sql>SELECT de.sk_evento, dc.sk_cliente, dt.fecha, dts.sk_tipo_stand, dca.sk_categoria, c.mts2, c.monto, c.nro_stand
-FROM bd_stands.contrato as c
-LEFT JOIN dimensional_eventos.dim_evento as de on c.cod_evento = de.sk_evento
-LEFT JOIN dimensional_eventos.dim_tipo_stand as dts on c.cod_tipo_stand = dts.sk_tipo_stand
-LEFT JOIN dimensional_eventos.dim_tiempo as dt on c.fecha_alquiler = dt.fecha
-LEFT JOIN dimensional_eventos.dim_cliente as dc on c.cod_cliente = dc.sk_cliente,
-bd_stands.categoria as ca
-LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_categoria</sql>
+    <sql>SELECT evento.sk_evento, cli.sk_cliente, tiempo.sk_tiempo, tipo.sk_tipo_stand, cat.sk_categoria, c.mts2, c.monto , c.nro_stand
+
+FROM bd_stands.contrato as c, 
+	 dimensional_eventos.dim_cliente as cli,
+	 dimensional_eventos.dim_tiempo as tiempo,
+	 dimensional_eventos.dim_evento as evento,
+	 dimensional_eventos.dim_tipo_stand as tipo,
+	 dimensional_eventos.dim_categoria as cat
+
+WHERE c.cod_cliente = cli.cod_cliente
+AND tiempo.fecha = c.fecha_alquiler
+AND evento.cod_evento = c.cod_evento
+AND tipo.cod_tipo_stand = c.cod_tipo_stand 
+AND cat.cod_subcategoria = c.cod_sub_categoria
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -549,7 +551,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -572,21 +574,21 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Date</type>
+        <type>BigNumber</type>
         <storagetype>normal</storagetype>
-        <name>fecha</name>
+        <name>sk_tiempo</name>
         <length>-1</length>
         <precision>-1</precision>
         <origin>ALQUILER</origin>
-        <comments>fecha</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <comments>sk_tiempo</comments>
+        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol/>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -595,7 +597,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -618,7 +620,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -641,7 +643,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -654,8 +656,8 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <origin>ALQUILER</origin>
         <comments>mts2</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -664,7 +666,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -677,8 +679,8 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <origin>ALQUILER</origin>
         <comments>monto</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -687,7 +689,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -700,8 +702,8 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <origin>ALQUILER</origin>
         <comments>nro_stand</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -710,7 +712,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -759,7 +761,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <name2/>
       </key>
       <key>
-        <name>fecha</name>
+        <name>sk_tiempo</name>
         <field>sk_fec_alquiler</field>
         <condition>=</condition>
         <name2/>
@@ -771,8 +773,14 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <name2/>
       </key>
       <key>
-        <name>sk_categoria</name>
-        <field>sk_categoria</field>
+        <name>mts2</name>
+        <field>mt2</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>monto</name>
+        <field>monto</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -783,8 +791,20 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <name2/>
       </key>
       <key>
+        <name>cantidad</name>
+        <field>cantidad</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
         <name>nro_stand</name>
         <field>num_contrato</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_categoria</name>
+        <field>sk_categoria</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -800,7 +820,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
       </value>
       <value>
         <name>sk_fec_alquiler</name>
-        <rename>fecha</rename>
+        <rename>sk_tiempo</rename>
         <update>N</update>
       </value>
       <value>
@@ -833,6 +853,11 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
         <rename>monto</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>cantidad</name>
+        <rename>cantidad</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -843,13 +868,13 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
+      <xloc>464</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>evento_alquiler2</name>
+    <name>agregar_cantidad</name>
     <type>Sequence</type>
     <description/>
     <distribute>Y</distribute>
@@ -859,7 +884,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <valuename>sk_fact_alquiler</valuename>
+    <valuename>cantidad</valuename>
     <use_database>N</use_database>
     <connection>connection_pentaho_bd_stands</connection>
     <schema/>
@@ -867,7 +892,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
     <use_counter>Y</use_counter>
     <counter_name/>
     <start_at>1</start_at>
-    <increment_by>1</increment_by>
+    <increment_by>0</increment_by>
     <max_value>999999999</max_value>
     <attributes/>
     <cluster_schema/>
@@ -878,35 +903,7 @@ LEFT JOIN dimensional_eventos.dim_categoria as dca on ca.cod_categoria = dca.sk_
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Selecciona/Renombra valores</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
+      <xloc>320</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
