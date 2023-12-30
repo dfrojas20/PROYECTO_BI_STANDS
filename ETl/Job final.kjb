@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>Job 1</name>
+  <name>Job final</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -426,7 +426,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>ETL_TIPO_STAND</name>
+      <name>DIM_TIPO_STAND</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -465,7 +465,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>Job_tiempo</name>
+      <name>DIM_TIEMPO</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -502,7 +502,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>fact_alquiler</name>
+      <name>FACT_ALQUILER</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -817,7 +817,7 @@
     </hop>
     <hop>
       <from>DIM_EVENTO</from>
-      <to>ETL_TIPO_STAND</to>
+      <to>DIM_TIPO_STAND</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -825,8 +825,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>ETL_TIPO_STAND</from>
-      <to>Job_tiempo</to>
+      <from>DIM_TIPO_STAND</from>
+      <to>DIM_TIEMPO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -834,8 +834,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Job_tiempo</from>
-      <to>fact_alquiler</to>
+      <from>DIM_TIEMPO</from>
+      <to>FACT_ALQUILER</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -843,7 +843,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>fact_alquiler</from>
+      <from>FACT_ALQUILER</from>
       <to>DIM_LEYENDA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
