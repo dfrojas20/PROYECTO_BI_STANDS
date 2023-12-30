@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>Job 1</name>
+  <name>Job_tiempo</name>
   <description/>
   <extended_description/>
   <job_version/>
   <directory>/</directory>
   <created_user>-</created_user>
-  <created_date>2023/12/28 20:14:23.824</created_date>
+  <created_date>2023/12/29 16:51:45.788</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2023/12/28 20:14:23.824</modified_date>
+  <modified_date>2023/12/29 16:51:45.788</modified_date>
   <parameters>
     </parameters>
   <slaveservers>
@@ -287,28 +287,6 @@
   <shared_objects_file/>
   <entries>
     <entry>
-      <name>Start</name>
-      <description/>
-      <type>SPECIAL</type>
-      <attributes/>
-      <start>Y</start>
-      <dummy>N</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>48</xloc>
-      <yloc>32</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
       <name>ETL_TIEMPO</name>
       <description/>
       <type>TRANS</type>
@@ -340,153 +318,52 @@
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
-      <parallel>Y</parallel>
+      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>144</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>ETL_CATEGORIA</name>
+      <name>Start</name>
       <description/>
-      <type>TRANS</type>
+      <type>SPECIAL</type>
       <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>C:\Users\Usuario\Desktop\SEMESTRE 9\INTELIGENCIA DE NEGOCIOS\PROYECTO_BD_STANDS\ETl\dim_categoria.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
+      <xloc>32</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>ETL_CLIENTE</name>
+      <name>Success</name>
       <description/>
-      <type>TRANS</type>
+      <type>SUCCESS</type>
       <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>C:/Users/Usuario/Desktop/SEMESTRE 9/INTELIGENCIA DE NEGOCIOS/PROYECTO_BD_STANDS/ETl/dim_cliente.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>32</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>ETL_EVENTO</name>
-      <description/>
-      <type>TRANS</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>C:/Users/Usuario/Desktop/SEMESTRE 9/INTELIGENCIA DE NEGOCIOS/PROYECTO_BD_STANDS/ETl/dim_evento.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <run_configuration>Pentaho local</run_configuration>
-      <suppress_result_data>N</suppress_result_data>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>480</xloc>
+      <xloc>256</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
     <hop>
-      <from>ETL_CATEGORIA</from>
-      <to>ETL_CLIENTE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>ETL_CLIENTE</from>
-      <to>ETL_EVENTO</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Start</from>
-      <to>ETL_CATEGORIA</to>
+      <to>ETL_TIEMPO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -494,8 +371,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>ETL_EVENTO</from>
-      <to>ETL_TIEMPO</to>
+      <from>ETL_TIEMPO</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

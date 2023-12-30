@@ -598,8 +598,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>96</yloc>
+      <xloc>192</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -636,8 +636,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <origin>SEDE</origin>
         <comments>cod_sede</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -646,7 +646,7 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -659,8 +659,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <origin>SEDE</origin>
         <comments>nb_sede</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -669,7 +669,7 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -682,8 +682,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <origin>SEDE</origin>
         <comments>cod_ciudad</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -692,7 +692,7 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -705,8 +705,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <origin>SEDE</origin>
         <comments>cod_pais</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -715,7 +715,7 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -728,8 +728,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <origin>SEDE</origin>
         <comments>nb_pais</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -738,7 +738,7 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -751,8 +751,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <origin>SEDE</origin>
         <comments>nb_ciudad</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -761,7 +761,7 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -775,8 +775,8 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>200</xloc>
-      <yloc>100</yloc>
+      <xloc>48</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
