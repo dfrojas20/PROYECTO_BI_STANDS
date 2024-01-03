@@ -304,7 +304,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
+      <xloc>32</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -343,7 +343,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
+      <xloc>112</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -382,7 +382,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
+      <xloc>208</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -421,7 +421,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
+      <xloc>304</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -460,7 +460,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>400</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -497,7 +497,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
+      <xloc>496</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -536,8 +536,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>32</yloc>
+      <xloc>592</xloc>
+      <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -575,7 +575,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>608</xloc>
+      <xloc>800</xloc>
       <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
@@ -614,8 +614,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>192</yloc>
+      <xloc>592</xloc>
+      <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -653,8 +653,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
-      <yloc>192</yloc>
+      <xloc>704</xloc>
+      <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -692,7 +692,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>480</xloc>
+      <xloc>400</xloc>
       <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
@@ -731,8 +731,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>336</xloc>
-      <yloc>192</yloc>
+      <xloc>800</xloc>
+      <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -770,7 +770,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
+      <xloc>208</xloc>
       <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
@@ -782,7 +782,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
+      <xloc>32</xloc>
       <yloc>192</yloc>
       <attributes_kjc/>
     </entry>
@@ -834,8 +834,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>DIM_TIEMPO</from>
-      <to>FACT_ALQUILER</to>
+      <from>FACT_EVENTO</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -843,7 +843,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>FACT_ALQUILER</from>
+      <from>DIM_TIEMPO</from>
       <to>DIM_LEYENDA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -862,7 +862,7 @@
     </hop>
     <hop>
       <from>DIM_VISITANTE</from>
-      <to>FACT_VISITA</to>
+      <to>DIM_SEDE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -871,6 +871,15 @@
     </hop>
     <hop>
       <from>FACT_VISITA</from>
+      <to>FACT_ALQUILER</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>FACT_ALQUILER</from>
       <to>FACT_EVENTO_STAND</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -880,15 +889,6 @@
     </hop>
     <hop>
       <from>FACT_EVENTO_STAND</from>
-      <to>DIM_SEDE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>DIM_SEDE</from>
       <to>FACT_EVENTO</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -897,8 +897,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>FACT_EVENTO</from>
-      <to>Success</to>
+      <from>DIM_SEDE</from>
+      <to>FACT_VISITA</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

@@ -488,12 +488,12 @@
   </connection>
   <order>
     <hop>
-      <from>Generate rows</from>
-      <to>Add sequence</to>
+      <from>3000 dias + 8 anios</from>
+      <to>agregar dias</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence</from>
+      <from>agregar dias</from>
       <to>Calculator</to>
       <enabled>Y</enabled>
     </hop>
@@ -519,12 +519,17 @@
     </hop>
     <hop>
       <from>nombrar_mes_corto</from>
+      <to>SK TIEMPO</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>SK TIEMPO</from>
       <to>insertar en dim tiempo</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Add sequence</name>
+    <name>agregar dias</name>
     <type>Sequence</type>
     <description/>
     <distribute>Y</distribute>
@@ -536,7 +541,7 @@
     </partitioning>
     <valuename>sequence</valuename>
     <use_database>N</use_database>
-    <connection/>
+    <connection>stands</connection>
     <schema/>
     <seqname>SEQ_</seqname>
     <use_counter>Y</use_counter>
@@ -705,7 +710,7 @@
     </GUI>
   </step>
   <step>
-    <name>Generate rows</name>
+    <name>3000 dias + 8 anios</name>
     <type>RowGenerator</type>
     <description/>
     <distribute>Y</distribute>
@@ -766,7 +771,7 @@
       <schema>dimensional_eventos</schema>
       <table>dim_tiempo</table>
       <key>
-        <name>sequence</name>
+        <name>sk_tiempo</name>
         <field>sk_tiempo</field>
         <condition>=</condition>
         <name2/>
@@ -845,7 +850,7 @@
       </key>
       <value>
         <name>sk_tiempo</name>
-        <rename>sequence</rename>
+        <rename>sk_tiempo</rename>
         <update>Y</update>
       </value>
       <value>
@@ -919,7 +924,7 @@
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>160</yloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1180,6 +1185,41 @@
     <GUI>
       <xloc>416</xloc>
       <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>SK TIEMPO</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>sk_tiempo</valuename>
+    <use_database>N</use_database>
+    <connection>stands</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1000</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

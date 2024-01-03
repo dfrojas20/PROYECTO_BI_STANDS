@@ -490,6 +490,11 @@
   <order>
     <hop>
       <from>SEDE</from>
+      <to>CREAR SK</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CREAR SK</from>
       <to>Insertar / Actualizar</to>
       <enabled>Y</enabled>
     </hop>
@@ -542,7 +547,7 @@
         <name2/>
       </key>
       <key>
-        <name>cod_sede</name>
+        <name>sk_sede</name>
         <field>sk_sede</field>
         <condition>=</condition>
         <name2/>
@@ -580,13 +585,13 @@
       </value>
       <value>
         <name>sk_sede</name>
-        <rename>cod_sede</rename>
+        <rename>sk_sede</rename>
         <update>Y</update>
       </value>
       <value>
         <name>cod_sede</name>
         <rename>cod_sede</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
     </lookup>
     <attributes/>
@@ -598,7 +603,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
+      <xloc>256</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -776,6 +781,41 @@ WHERE s.cod_ciudad = c.cod_ciudad AND c.cod_pais = p.cod_pais</sql>
     </remotesteps>
     <GUI>
       <xloc>48</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>CREAR SK</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>sk_sede</valuename>
+    <use_database>N</use_database>
+    <connection>connection_dimensional_bd_stands</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1000</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>

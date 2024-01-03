@@ -811,37 +811,37 @@ AND cat.cod_subcategoria = c.cod_sub_categoria
       <value>
         <name>sk_evento</name>
         <rename>sk_evento</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>sk_cliente</name>
         <rename>sk_cliente</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>sk_fec_alquiler</name>
         <rename>sk_tiempo</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>sk_tipo_stand</name>
         <rename>sk_tipo_stand</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>sk_categoria</name>
         <rename>sk_categoria</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>num_contrato</name>
         <rename>nro_stand</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>num_stand</name>
         <rename>nro_stand</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>mt2</name>
@@ -856,7 +856,7 @@ AND cat.cod_subcategoria = c.cod_sub_categoria
       <value>
         <name>cantidad</name>
         <rename>cantidad</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
     </lookup>
     <attributes/>

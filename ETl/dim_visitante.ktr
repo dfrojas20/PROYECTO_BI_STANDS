@@ -490,10 +490,50 @@
   <order>
     <hop>
       <from>VISITANTE</from>
+      <to>CREAR SK</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CREAR SK</from>
       <to>Insertar / Actualizar</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>CREAR SK</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>sk_visitante</valuename>
+    <use_database>N</use_database>
+    <connection>connection_dimensional_bd_stands</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1000</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Insertar / Actualizar</name>
     <type>InsertUpdate</type>
@@ -524,7 +564,7 @@
         <name2/>
       </key>
       <key>
-        <name>cod_visitante</name>
+        <name>sk_visitante</name>
         <field>sk_visitante</field>
         <condition>=</condition>
         <name2/>
@@ -574,7 +614,7 @@
       </value>
       <value>
         <name>sk_visitante</name>
-        <rename>cod_visitante</rename>
+        <rename>sk_visitante</rename>
         <update>Y</update>
       </value>
     </lookup>

@@ -490,10 +490,80 @@
   <order>
     <hop>
       <from>LEYENDA</from>
+      <to>CREAR SK</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CREAR SK</from>
       <to>Insertar / Actualizar</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Insertar / Actualizar</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>connection_dimensional_bd_stands</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dimensional_eventos</schema>
+      <table>dim_leyenda</table>
+      <key>
+        <name>sk_leyenda</name>
+        <field>sk_leyenda</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>nb_descripcion</name>
+        <field>nb_leyenda</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cod_leyenda_estrellas</name>
+        <field>cod_leyenda</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>nb_leyenda</name>
+        <rename>nb_descripcion</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sk_leyenda</name>
+        <rename>sk_leyenda</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_leyenda</name>
+        <rename>cod_leyenda_estrellas</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>LEYENDA</name>
     <type>TableInput</type>
@@ -524,8 +594,8 @@ FROM bd_stands.leyenda_estrellas</sql>
         <origin>LEYENDA</origin>
         <comments>cod_leyenda_estrellas</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -534,7 +604,7 @@ FROM bd_stands.leyenda_estrellas</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -547,8 +617,8 @@ FROM bd_stands.leyenda_estrellas</sql>
         <origin>LEYENDA</origin>
         <comments>nb_descripcion</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -557,7 +627,7 @@ FROM bd_stands.leyenda_estrellas</sql>
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_ES</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -571,14 +641,14 @@ FROM bd_stands.leyenda_estrellas</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>200</xloc>
-      <yloc>100</yloc>
+      <xloc>192</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insertar / Actualizar</name>
-    <type>InsertUpdate</type>
+    <name>CREAR SK</name>
+    <type>Sequence</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -587,46 +657,16 @@ FROM bd_stands.leyenda_estrellas</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <valuename>sk_leyenda</valuename>
+    <use_database>N</use_database>
     <connection>connection_dimensional_bd_stands</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dimensional_eventos</schema>
-      <table>dim_leyenda</table>
-      <key>
-        <name>cod_leyenda_estrellas</name>
-        <field>sk_leyenda</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>nb_descripcion</name>
-        <field>nb_leyenda</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>cod_leyenda_estrellas</name>
-        <field>cod_leyenda</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>nb_leyenda</name>
-        <rename>nb_descripcion</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>sk_leyenda</name>
-        <rename>cod_leyenda_estrellas</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>cod_leyenda</name>
-        <rename>cod_leyenda_estrellas</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1000</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -636,8 +676,8 @@ FROM bd_stands.leyenda_estrellas</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>100</yloc>
+      <xloc>288</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
