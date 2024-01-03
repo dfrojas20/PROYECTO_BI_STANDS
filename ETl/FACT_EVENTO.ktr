@@ -488,7 +488,22 @@
   </connection>
   <order>
     <hop>
+      <from>Microsoft Excel input</from>
+      <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>EVENTO</from>
+      <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join rows (cartesian product)</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
       <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
@@ -505,11 +520,11 @@
       <schema_name/>
     </partitioning>
     <connection>connection_dimensional_bd_stands</connection>
-    <sql>SELECT de.sk_evento as sk_evento, ds.sk_sede as sk_sede, dt.sk_tiempo as sk_fec_evento, 
+    <sql>SELECT de.sk_evento as sk_evento, ds.sk_sede as sk_sede, dt.sk_tiempo as sk_fec_evento, ev.cod_evento ,
 
 (SELECT sum(event.precio * event.cantidad_estimada) 
  FROM bd_stands.evento_stand as event
- where ev.cod_evento = event.cod_evento ) as meta_ingreso, CAST( (RANDOM() * 49) + 1  AS INTEGER) AS cantidad_estim_visitantes, 1 as cantidad_evento
+ where ev.cod_evento = event.cod_evento ) as meta_ingreso, 1 as cantidad_evento
 
 FROM bd_stands.evento ev
 INNER JOIN dimensional_eventos.dim_evento as de on ev.cod_evento = de.cod_evento
@@ -592,16 +607,16 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>BigNumber</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>meta_ingreso</name>
-        <length>-1</length>
-        <precision>-1</precision>
+        <name>cod_evento</name>
+        <length>9</length>
+        <precision>0</precision>
         <origin>EVENTO</origin>
-        <comments>meta_ingreso</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
+        <comments>cod_evento</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -615,16 +630,16 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>BigNumber</type>
         <storagetype>normal</storagetype>
-        <name>cantidad_estim_visitantes</name>
-        <length>9</length>
-        <precision>0</precision>
+        <name>meta_ingreso</name>
+        <length>-1</length>
+        <precision>-1</precision>
         <origin>EVENTO</origin>
-        <comments>cantidad_estim_visitantes</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <comments>meta_ingreso</comments>
+        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
+        <grouping_symbol/>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -714,8 +729,215 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>48</yloc>
+      <xloc>432</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Microsoft Excel input</name>
+    <type>ExcelInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <header>Y</header>
+    <noempty>Y</noempty>
+    <stoponempty>N</stoponempty>
+    <filefield/>
+    <sheetfield/>
+    <sheetrownumfield/>
+    <rownumfield/>
+    <sheetfield/>
+    <filefield/>
+    <limit>0</limit>
+    <encoding/>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <accept_filenames>N</accept_filenames>
+    <accept_field/>
+    <accept_stepname/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <name>C:\Users\Usuario\Desktop\SEMESTRE 9\INTELIGENCIA DE NEGOCIOS\PROYECTO_BD_STANDS\bd_stands\visitantes_min.xlsx</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>id_evento</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>visitantes</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+    </fields>
+    <sheets>
+      <sheet>
+        <name>Datos</name>
+        <startrow>0</startrow>
+        <startcol>0</startcol>
+      </sheet>
+    </sheets>
+    <strict_types>N</strict_types>
+    <error_ignored>N</error_ignored>
+    <error_line_skipped>N</error_line_skipped>
+    <bad_line_files_destination_directory/>
+    <bad_line_files_extension>warning</bad_line_files_extension>
+    <error_line_files_destination_directory/>
+    <error_line_files_extension>error</error_line_files_extension>
+    <line_number_files_destination_directory/>
+    <line_number_files_extension>line</line_number_files_extension>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <spreadsheet_type>POI</spreadsheet_type>
+    <password>Encrypted </password>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>48</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join rows (cartesian product)</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>id_evento</leftvalue>
+        <function>=</function>
+        <rightvalue>cod_evento</rightvalue>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>visitantes</name>
+        <rename>cantidad_estim_visitantes</rename>
+      </field>
+      <field>
+        <name>sk_evento</name>
+        <rename/>
+      </field>
+      <field>
+        <name>sk_sede</name>
+        <rename/>
+      </field>
+      <field>
+        <name>sk_fec_evento</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cod_evento</name>
+        <rename/>
+      </field>
+      <field>
+        <name>meta_ingreso</name>
+        <rename/>
+      </field>
+      <field>
+        <name>cantidad_evento</name>
+        <rename/>
+      </field>
+      <field>
+        <name>id_evento</name>
+        <rename/>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>id_evento</name>
+      </remove>
+      <remove>
+        <name>cod_evento</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
