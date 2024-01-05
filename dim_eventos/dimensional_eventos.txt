@@ -1,5 +1,5 @@
 --CREATE DATABASE STANDS
---DROP SCHEMA IF EXISTS dimensional_eventos CASCADE;
+DROP SCHEMA IF EXISTS dimensional_eventos CASCADE;
 -- Crear esquema dimensional_eventos
 
 CREATE SCHEMA dimensional_eventos;
