@@ -67,7 +67,7 @@ CREATE TABLE bd_stands.evento_stand (
 );
 
 -- Crear tabla CATEGORIA
-CREATE TABLE categoria (
+CREATE TABLE bd_stands.categoria (
     cod_categoria SERIAL PRIMARY KEY,
     nb_categoria VARCHAR(255) NOT NULL
 );
