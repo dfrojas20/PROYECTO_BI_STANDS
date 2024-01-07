@@ -504,7 +504,7 @@
     </hop>
     <hop>
       <from>Select values</from>
-      <to>Table output</to>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -691,8 +691,8 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
     </GUI>
   </step>
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Join rows (cartesian product)</name>
+    <type>JoinRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -701,25 +701,18 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>connection_dimensional_bd_stands</connection>
-    <schema>dimensional_eventos</schema>
-    <table>fact_evento</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-    </fields>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>id_evento</leftvalue>
+        <function>=</function>
+        <rightvalue>cod_evento</rightvalue>
+      </condition>
+    </compare>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -729,7 +722,7 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>176</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -839,43 +832,6 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
     </GUI>
   </step>
   <step>
-    <name>Join rows (cartesian product)</name>
-    <type>JoinRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <cache_size>500</cache_size>
-    <main/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>id_evento</leftvalue>
-        <function>=</function>
-        <rightvalue>cod_evento</rightvalue>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
@@ -893,31 +849,24 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
       </field>
       <field>
         <name>sk_evento</name>
-        <rename/>
       </field>
       <field>
         <name>sk_sede</name>
-        <rename/>
       </field>
       <field>
         <name>sk_fec_evento</name>
-        <rename/>
       </field>
       <field>
         <name>cod_evento</name>
-        <rename/>
       </field>
       <field>
         <name>meta_ingreso</name>
-        <rename/>
       </field>
       <field>
         <name>cantidad_evento</name>
-        <rename/>
       </field>
       <field>
         <name>id_evento</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
       <remove>
@@ -937,6 +886,104 @@ INNER JOIN dimensional_eventos.dim_tiempo as dt on ev.fecha_inicio = dt.fecha</s
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>connection_dimensional_bd_stands</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dimensional_eventos</schema>
+      <table>fact_evento</table>
+      <key>
+        <name>cantidad_estim_visitantes</name>
+        <field>cantidad_estim_visitantes</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_evento</name>
+        <field>sk_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_sede</name>
+        <field>sk_sede</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_fec_evento</name>
+        <field>sk_fec_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>meta_ingreso</name>
+        <field>meta_ingreso</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>cantidad_evento</name>
+        <field>cantidad_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cantidad_estim_visitantes</name>
+        <rename>cantidad_estim_visitantes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sk_evento</name>
+        <rename>sk_evento</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>sk_sede</name>
+        <rename>sk_sede</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>sk_fec_evento</name>
+        <rename>sk_fec_evento</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>meta_ingreso</name>
+        <rename>meta_ingreso</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cantidad_evento</name>
+        <rename>cantidad_evento</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>

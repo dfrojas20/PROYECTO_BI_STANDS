@@ -811,27 +811,27 @@ AND cat.cod_subcategoria = c.cod_sub_categoria
       <value>
         <name>sk_evento</name>
         <rename>sk_evento</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>sk_cliente</name>
         <rename>sk_cliente</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>sk_fec_alquiler</name>
         <rename>sk_tiempo</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>sk_tipo_stand</name>
         <rename>sk_tipo_stand</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>sk_categoria</name>
         <rename>sk_categoria</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>num_contrato</name>

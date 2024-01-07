@@ -547,7 +547,7 @@
     </partitioning>
     <connection>connection_dimensional_bd_stands</connection>
     <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dimensional_eventos</schema>
       <table>dim_visitante</table>
@@ -615,7 +615,7 @@
       <value>
         <name>sk_visitante</name>
         <rename>sk_visitante</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
     </lookup>
     <attributes/>

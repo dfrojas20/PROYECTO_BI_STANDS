@@ -566,7 +566,7 @@
       <key>
         <name>cantidad</name>
         <field>cantidad_visita</field>
-        <condition/>
+        <condition>=</condition>
         <name2/>
       </key>
       <value>
@@ -592,7 +592,7 @@
       <value>
         <name>num_entrada</name>
         <rename>nro_entrada</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>hora_entrada</name>
@@ -612,7 +612,7 @@
       <value>
         <name>cantidad_visita</name>
         <rename>cantidad</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
     </lookup>
     <attributes/>
